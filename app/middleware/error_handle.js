@@ -17,6 +17,15 @@ module.exports = (option, app) => {
         msg: 'fail',
         data: error,
       };
+      //参数验证异常
+      if(status === 422 && err.message === 'Validation Failed'){
+        ctx.body = {
+          msg: 'fail',
+          data: err.errors,
+        };
+      }
+      // 返回状态码
+      ctx.status = status
     }
   };
 };

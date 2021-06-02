@@ -47,7 +47,7 @@ module.exports = appInfo => {
       //自动写入时间戳
       timestamps: true,
       //字段生成软删除时间戳
-      paranoid: true,
+      paranoid: null,
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       //软删除
@@ -55,6 +55,10 @@ module.exports = appInfo => {
       //所有驼峰命名化
       underscored: true
     }
+  };
+  config.valparams = {
+    locale: 'zh-cn',
+    throwError: true
   };
 
   return {
