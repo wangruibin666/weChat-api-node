@@ -56,9 +56,17 @@ module.exports = appInfo => {
       underscored: true
     }
   };
+  //参数验证
   config.valparams = {
     locale: 'zh-cn',
     throwError: true
+  };
+  //加密
+  config.crypto = {
+    secret: 'qhdgw@45ncashdaksh2!#@3nxjdas*_672'
+  };
+  exports.jwt = {
+    secret: 'qhdgw@45ncashdaksh2!#@3nxjdas*_672'
   };
 
   return {

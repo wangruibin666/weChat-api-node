@@ -12,16 +12,19 @@ module.exports = (option, app) => {
       // 所有的异常在APP上出发一个error事件，框架会记录一条错误日志
       app.emit('error', err, ctx);
       const status = err.status || 500;
-      const error = (status === 500 && app.config.env === 'prod') ? 'Internal Server Error' : err.message
+      let error = (status === 500 && app.config.env === 'prod') ? 'Internal Server Error' : err.message
       ctx.body = {
         msg: 'fail',
         data: error,
       };
       //参数验证异常
       if(status === 422 && err.message === 'Validation Failed'){
+        if(err.errors && Array.isArray(err.errors)){
+          error = err.errors[0].err[0]
+        }
         ctx.body = {
           msg: 'fail',
-          data: err.errors,
+          data: error,
         };
       }
       // 返回状态码
