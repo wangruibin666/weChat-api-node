@@ -77,6 +77,10 @@ class UserController extends Controller {
     delete user.password
     console.log(user);
     // 加入缓存
+    if(!await this.service.catche.set('user_'+user.id, token)){
+      ctx.throw(400, '登录失败')
+    }
+    
     // 返回用户信息和token
     return ctx.apiSuccess(user)
   };
@@ -89,6 +93,12 @@ class UserController extends Controller {
     password = hmac.digest("hex");
     let res = password === hash_password;
     !res && this.ctx.throw(400, '参数错误')
+  }
+
+  //退出登录
+  async logout() {
+    console.log(this.ctx.authUser);
+    this.ctx.body = '退出登录'
   }
 
 }

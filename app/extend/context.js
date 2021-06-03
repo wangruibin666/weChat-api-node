@@ -1,6 +1,6 @@
 module.exports = {
   //api 返回成功
-  //扩展里面直接this => 外面的this.ctx
+  //this 就是 ctx 对象，在其中可以调用 ctx 上的其他方法，或访问属性
   apiSuccess(data = '', msg = 'ok', code = 200){
     this.status = 200;
     this.body = {
@@ -16,7 +16,7 @@ module.exports = {
   getToken(value) {
     return this.app.jwt.sign(value, this.app.config.jwt.secret);
   },
-  // 生成token
+  // 验证token
   checkToken(token){
     return this.app.jwt.verify(token, this.app.config.jwt.secret)
   }

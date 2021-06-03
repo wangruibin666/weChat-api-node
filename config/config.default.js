@@ -16,7 +16,11 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1622470602618_6497';
 
   // add your middleware config here
-  config.middleware = ['errorHandle'];
+  config.middleware = ['errorHandle','auth'];
+
+  config.auth = {
+    ignore: ['/reg', '/login']
+  };
 
   // add your user config here
   const userConfig = {
@@ -67,6 +71,16 @@ module.exports = appInfo => {
   };
   exports.jwt = {
     secret: 'qhdgw@45ncashdaksh2!#@3nxjdas*_672'
+  };
+  
+  // redis存储
+  config.redis = {
+    client: {
+        port: 6379,          // Redis port
+        host: '127.0.0.1',   // Redis host
+        password: '123456',
+        db: 2,
+    },
   };
 
   return {
