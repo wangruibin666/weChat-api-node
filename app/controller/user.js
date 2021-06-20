@@ -97,8 +97,16 @@ class UserController extends Controller {
 
   //退出登录
   async logout() {
-    console.log(this.ctx.authUser);
-    this.ctx.body = '退出登录'
+    const { ctx, service} = this;
+    //拿到当前用户id
+    let current_user_id = ctx.authUser.id;
+  
+    //移除redis当前用户信息
+    if(!await service.catche.remove('user_'+current_user_id)){
+      ctx.throw(400, '退出登录失败')
+    }
+    ctx.apiSuccess('退出成功')
+    
   }
 
 }

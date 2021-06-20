@@ -22,7 +22,7 @@ module.exports = (option, app) => {
     //4.获取当前用户，验证当前用户是否被禁用
     user = await app.model.User.findByPk(user.id)
     if(!user || user.status == 0){
-      ctx.throw('用户不存在或已被禁用')
+      ctx.throw(400, '用户不存在或已被禁用')
     }
 
     // 5.把user信息挂载到全局ctx上
